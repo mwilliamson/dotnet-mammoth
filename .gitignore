@@ -1,0 +1,9 @@
+*.suo
+*.user
+/.nuget/*.exe
+/packages
+/Mammoth/bin
+/Mammoth/obj
+/Mammoth/edge
+/Mammoth.Tests/bin
+/Mammoth.Tests/obj
