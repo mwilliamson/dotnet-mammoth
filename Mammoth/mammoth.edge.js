@@ -4,7 +4,7 @@ return function(data, callback) {
 
     mammoth.convertToHtml({arrayBuffer: toArrayBuffer(data)})
         .then(function(result) {
-            callback(null, result.value);
+            callback(null, result);
         }, callback);
 
     function toArrayBuffer(buffer) {

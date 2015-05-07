@@ -1,6 +1,7 @@
 ﻿using EdgeJs;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -16,7 +17,14 @@ namespace Mammoth
             var result = f(File.ReadAllBytes(path));
             Task.WaitAll(result);
 
-            return new Result<string>((string)result.Result, new List<Message>());
+            return ReadResult(result.Result);
+        }
+
+        private Result<string> ReadResult(dynamic result)
+        {
+            var rawMessages = (dynamic[])result.messages;
+            var messages = rawMessages.Select(message => Message.Warning((string)message.message)).ToList();
+            return new Result<string>(result.value, messages);
         }
 
         private static string ReadResource(string resourceName)

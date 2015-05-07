@@ -68,6 +68,9 @@
     <None Include="TestDocuments\single-paragraph.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="TestDocuments\unrecognised-paragraph-styles.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mammoth\Mammoth.csproj">
