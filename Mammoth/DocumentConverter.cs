@@ -1,42 +1,57 @@
-﻿using EdgeJs;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
+using Mammoth.Couscous;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal;
+using Mammoth.Couscous.org.zwobble.mammoth.@internal.conversion;
 
-namespace Mammoth
-{
-    public class DocumentConverter
-    {
-        public Result<string> ConvertToHtml(string path)
-        {
-            var mammothJs = ReadResource("Mammoth.mammoth.browser.js") + ReadResource("Mammoth.mammoth.edge.js");
-            
-            var f = Edge.Func(mammothJs);
-            var result = f(File.ReadAllBytes(path));
-            Task.WaitAll(result);
+namespace Mammoth {
+    public class DocumentConverter {
+        private readonly DocumentToHtmlOptions options;
 
-            return ReadResult(result.Result);
+        public DocumentConverter() : this(DocumentToHtmlOptions._DEFAULT) {
         }
 
-        private Result<string> ReadResult(dynamic result)
-        {
-            var rawMessages = (dynamic[])result.messages;
-            var messages = rawMessages.Select(message => Message.Warning((string)message.message)).ToList();
-            return new Result<string>(result.value, messages);
+        private DocumentConverter(DocumentToHtmlOptions options) {
+            this.options = options;
         }
 
-        private static string ReadResource(string resourceName)
-        {
-            var currentAssembly = Assembly.GetExecutingAssembly();
-            using (var stream = currentAssembly.GetManifestResourceStream(resourceName))
-            {
-                using (var reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
+        public DocumentConverter IdPrefix(string idPrefix) {
+            return new DocumentConverter(options.idPrefix(idPrefix));
+        }
+
+        public DocumentConverter PreserveEmptyParagraphs() {
+            return new DocumentConverter(options.preserveEmptyParagraphs());
+        }
+
+        public DocumentConverter AddStyleMap(string styleMap) {
+            return new DocumentConverter(options.addStyleMap(styleMap));
+        }
+
+        public DocumentConverter DisableDefaultStyleMap() {
+            return new DocumentConverter(options.disableDefaultStyleMap());
+        }
+
+        public IResult<string> ConvertToHtml(Stream stream) {
+            return new InternalDocumentConverter(options)
+                .convertToHtml(ToJava.StreamToInputStream(stream))
+                .ToResult();
+        }
+
+        public IResult<string> ConvertToHtml(string path) {
+            return new InternalDocumentConverter(options)
+                .convertToHtml(new Couscous.java.io.File(path))
+                .ToResult();
+        }
+
+        public IResult<string> ExtractRawText(Stream stream) {
+            return new InternalDocumentConverter(options)
+                .extractRawText(ToJava.StreamToInputStream(stream))
+                .ToResult();
+        }
+
+        public IResult<string> ExtractRawText(string path) {
+            return new InternalDocumentConverter(options)
+                .extractRawText(new Couscous.java.io.File(path))
+                .ToResult();
         }
     }
 }
