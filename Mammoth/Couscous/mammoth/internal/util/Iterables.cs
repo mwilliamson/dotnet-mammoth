@@ -25,7 +25,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util
 					return new Some<T>(value);
 				}
 			}
-			return new None<T>();
+			return None<T>.Instance;
 		}
 		
 		internal static Iterable<T> lazyFilter<T>(Iterable<T> iterable, Predicate<T> predicate) {

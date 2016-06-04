@@ -16,6 +16,11 @@ namespace Mammoth.Couscous.java.util
     }
 
 	internal class None<T> : Optional<T> {
+		internal static readonly None<T> Instance = new None<T>();
+		
+		private None() {
+		}
+		
 		public bool isPresent() {
 			return false;
 		}
@@ -92,7 +97,7 @@ namespace Mammoth.Couscous.java.util
     {
 		internal static Optional<T> empty<T>()
         {
-			return new None<T>();
+			return None<T>.Instance;
         }
         
         internal static Optional<T> of<T>(T value)

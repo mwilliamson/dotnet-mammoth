@@ -50,7 +50,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
         
         internal static Optional<T> tryGetLast<T>(List<T> list) {
             if (list.isEmpty()) {
-                return new None<T>();
+                return None<T>.Instance;
             } else {
                 return new Some<T>(list.get(list.size() - 1));
             }

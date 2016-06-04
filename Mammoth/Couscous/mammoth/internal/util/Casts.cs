@@ -6,7 +6,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
             if (value is T) {
                 return new Some<T>((T) value);
             } else {
-                return new None<T>();
+                return None<T>.Instance;
             }
         }
     }

@@ -30,7 +30,7 @@ namespace Mammoth.Couscous.java.util {
             if (_dictionary.ContainsKey(key)) {
                 return new Some<TValue>(_dictionary[key]);
             } else {
-                return new None<TValue>();
+                return None<TValue>.Instance;
             }
         }
         
