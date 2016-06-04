@@ -1,6 +1,7 @@
 .PHONY: build test
 
 build:
+	couscous
 	xbuild Mammoth.sln
 
 test: build
