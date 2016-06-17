@@ -1,0 +1,7 @@
+sudo: false
+language: csharp
+solution: Mammoth.sln
+script:
+    - xbuild Mammoth.sln
+    - nuget install xunit.runner.console -Version 2.1.0 -OutputDirectory packages
+    - mono --debug packages/xunit.runner.console.2.1.0/tools/xunit.console.exe Mammoth.Tests/bin/Debug/Mammoth.Tests.dll -noshadow
