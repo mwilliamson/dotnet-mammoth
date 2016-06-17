@@ -88,6 +88,21 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util
             public V getValue() {
                 return _value;
             }
+            
+            public override bool Equals(object otherObj) {
+                var other = otherObj as Entry<K, V>;
+                if (other == null) {
+                    return false;
+                } else if (object.ReferenceEquals(this, other)) {
+                    return true;
+                } else {
+                    return _key.Equals(other._key) && _value.Equals(other._value);
+                }
+            }
+
+            public override int GetHashCode() {
+                return _key.GetHashCode() * 17 + _value.GetHashCode();
+            }
         }
         
         internal static Builder<K, V> builder<K, V>() {

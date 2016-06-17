@@ -8,6 +8,15 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util
 {
 	internal static class Iterables
 	{
+		internal static Optional<T> getFirst<T>(Iterable<T> iterable) {
+			var iterator = iterable.iterator();
+			if (iterator.hasNext()) {
+				return Optional.of(iterator.next());
+			} else {
+				return Optional.empty<T>();
+			}
+		}
+		
 		internal static T getFirst<T>(Iterable<T> iterable, T defaultValue) {
 			var iterator = iterable.iterator();
 			if (iterator.hasNext()) {
