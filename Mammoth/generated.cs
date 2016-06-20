@@ -1370,6 +1370,8 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 return this.readInline(element);
             } else if (_couscous_tmp_1.Equals("wp:anchor")) {
                 return this.readInline(element);
+            } else if (_couscous_tmp_1.Equals("w:sdt")) {
+                return this.readSdt(element);
             } else if (_couscous_tmp_1.Equals("w:ins")) {
                 return this.readElements(element.getChildren());
             } else if (_couscous_tmp_1.Equals("w:smartTag")) {
@@ -1521,7 +1523,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 }
                 rowIndex = rowIndex + 1;
             }
-            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerMap<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(rows, new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.BodyXmlReader_Anonymous_42(merged, rowspans)));
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.eagerMapWithIndex<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement>(rows, new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.BodyXmlReader_Anonymous_42(merged, rowspans)));
         }
         public Mammoth.Couscous.java.util.Optional<string> checkTableRows(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> rows) {
             Mammoth.Couscous.java.util.Iterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.DocumentElement> _couscous_tmp_3 = rows.iterator();
@@ -1614,6 +1616,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             } else {
                 return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.withWarning(image, ("Image of type " + contentTypeString) + " is unlikely to display in web browsers");
             }
+        }
+        public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readSdt(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
+            return this.readElements((element.findChildOrEmpty("w:sdtContent")).getChildren());
         }
         public string relationshipIdToDocxPath(string relationshipId) {
             Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Relationship relationship = (this._relationships).findRelationshipById(relationshipId);

@@ -20,7 +20,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
             return ToJava.ListToList(result);
         }
         
-        internal static List<U> eagerMap<T, U>(Iterable<T> iterable, BiFunction<int, T, U> function) {
+        internal static List<U> eagerMapWithIndex<T, U>(Iterable<T> iterable, BiFunction<int, T, U> function) {
             var result = FromJava.IterableToEnumerable(iterable)
                 .Select((value, index) => function.apply(index, value))
                 .ToList();
