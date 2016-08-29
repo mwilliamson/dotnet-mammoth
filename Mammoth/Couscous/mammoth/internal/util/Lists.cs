@@ -48,6 +48,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
 			return ToJava.ListToList(result);
         }
         
+        internal static List<T> eagerConcat<T>(Iterable<T> first, Iterable<T> second, Iterable<T> third) {
+            var result = FromJava.IterableToEnumerable(first)
+				.Concat(FromJava.IterableToEnumerable(second))
+                .Concat(FromJava.IterableToEnumerable(third))
+                .ToList();
+			return ToJava.ListToList(result);
+        }
+        
         internal static List<T> orderedBy<T, R>(Iterable<T> iterable, Function<T, R> getKey) {
             var result = FromJava.IterableToEnumerable(iterable)
                 .OrderBy(getKey.apply)

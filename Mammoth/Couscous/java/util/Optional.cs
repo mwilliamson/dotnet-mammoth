@@ -15,11 +15,8 @@ namespace Mammoth.Couscous.java.util
 		void ifPresent(Consumer<T> consumer);
     }
 
-	internal class None<T> : Optional<T> {
+	internal struct None<T> : Optional<T> {
 		internal static readonly None<T> Instance = new None<T>();
-		
-		private None() {
-		}
 		
 		public bool isPresent() {
 			return false;
@@ -53,7 +50,7 @@ namespace Mammoth.Couscous.java.util
 		}
 	}
 
-	internal class Some<T> : Optional<T> {
+	internal struct Some<T> : Optional<T> {
 		private readonly T _value;
 
 		internal Some(T value) {
