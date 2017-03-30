@@ -2,15 +2,15 @@ using System.IO.Compression;
 using Mammoth.Couscous.java.io;
 using Mammoth.Couscous.java.util;
 
-namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
-    internal class ZippedDocxFile : DocxFile {
+namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
+    internal class ZippedArchive : Archive {
         private readonly ZipArchive _zipFile;
         
-        internal ZippedDocxFile(File file) {
+        internal ZippedArchive(File file) {
             _zipFile = ZipFile.OpenRead(file.Path);
         }
 
-        internal ZippedDocxFile(System.IO.Stream stream) {
+        internal ZippedArchive(System.IO.Stream stream) {
             _zipFile = new ZipArchive(stream);
         }
         

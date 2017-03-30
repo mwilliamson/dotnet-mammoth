@@ -12,6 +12,9 @@ namespace Mammoth.Couscous.java.util {
             _list = list;
         }
         
+        internal ArrayList(List<T> list) : this(new System.Collections.Generic.List<T>(FromJava.IterableToEnumerable(list))) {
+        }
+        
         public Iterator<T> iterator() {
             return ToJava.EnumeratorToIterator(_list.GetEnumerator());
         }
@@ -44,6 +47,10 @@ namespace Mammoth.Couscous.java.util {
             T value = _list[index];
             _list.RemoveAt(index);
             return value;
+        }
+        
+        public void set(int index, T value) {
+            _list[index] = value;
         }
     }
 }

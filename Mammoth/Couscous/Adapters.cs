@@ -76,7 +76,7 @@ namespace Mammoth.Couscous {
             }
         }
         
-        internal static Map<TKey, TValue> DictionaryToMap<TKey, TValue>(IDictionary<TKey, TValue> dictionary) {
+        internal static Map<TKey, TValue> DictionaryToMap<TKey, TValue>(Dictionary<TKey, TValue> dictionary) {
             return new HashMap<TKey, TValue>(dictionary);
         }
         
@@ -93,6 +93,38 @@ namespace Mammoth.Couscous {
             
             internal StreamToInputStreamAdapter(System.IO.Stream stream) {
                 Stream = stream;
+            }
+        }
+        
+        internal static java.util.Collection<T> CollectionToCollection<T>(ICollection<T> collection) {
+            return new CollectionToCollectionAdapter<T>(collection);
+        }
+        
+        private class CollectionToCollectionAdapter<T> : java.util.Collection<T> {
+            private readonly ICollection<T> _collection;
+            
+            internal CollectionToCollectionAdapter(ICollection<T> collection) {
+                _collection = collection;
+            }
+            
+            public bool isEmpty() {
+                return _collection.Count == 0;
+            }
+            
+            public int size() {
+                return _collection.Count;
+            }
+            
+            public bool contains(object value) {
+                return value is T && _collection.Contains((T) value);
+            }
+            
+            public Iterator<T> iterator() {
+                return ToJava.EnumeratorToIterator(_collection.GetEnumerator());
+            }
+            
+            public void add(T value) {
+                throw new UnsupportedOperationException();
             }
         }
     }
