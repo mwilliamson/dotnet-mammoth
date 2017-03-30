@@ -9,6 +9,10 @@ namespace Mammoth.Couscous {
             return (!first.isPresent() && !second.isPresent()) || (first.isPresent() && second.isPresent() && first.get() == second.get());
         }
         
+        internal static bool equals(this Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break__Type first, Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Break__Type second) {
+            return first == second;
+        }
+        
         internal static bool equals(this Map<string, string> firstMap, Map<string, string> secondMap) {
             var first = FromJava.MapToDictionary(firstMap);
             var second = FromJava.MapToDictionary(secondMap);

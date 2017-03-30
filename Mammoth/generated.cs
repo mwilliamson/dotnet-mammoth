@@ -4312,7 +4312,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal static class RegexTokeniser {
         public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<T> rule<T>(T type, string regex) {
-            return this.create_TokenRule(type, Mammoth.Couscous.java.util.regex.Pattern.compile(regex));
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<T>(type, Mammoth.Couscous.java.util.regex.Pattern.compile(regex));
         }
     }
 }
@@ -4341,9 +4341,6 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             }
             return tokens;
         }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<T> create_TokenRule<T>(T type, Mammoth.Couscous.java.util.regex.Pattern regex) {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<T>(this, type, regex);
-        }
     }
 }
 
@@ -4355,14 +4352,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class RegexTokeniser__TokenRule<T> {
         internal T _type;
         internal Mammoth.Couscous.java.util.regex.Pattern _regex;
-        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<T> _this_org__zwobble__mammoth__internal__styles__parsing__RegexTokeniser__TokenRule;
-        internal RegexTokeniser__TokenRule(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<T> this_org__zwobble__mammoth__internal__styles__parsing__RegexTokeniser__TokenRule, T type, Mammoth.Couscous.java.util.regex.Pattern regex) {
-            this._this_org__zwobble__mammoth__internal__styles__parsing__RegexTokeniser__TokenRule = this_org__zwobble__mammoth__internal__styles__parsing__RegexTokeniser__TokenRule;
+        internal RegexTokeniser__TokenRule(T type, Mammoth.Couscous.java.util.regex.Pattern regex) {
             if ((regex.matcher("")).groupCount() != 0) {
                 throw new Mammoth.Couscous.java.lang.RuntimeException("regex cannot contain any groups");
             }
-            (this._this_org__zwobble__mammoth__internal__styles__parsing__RegexTokeniser__TokenRule)._type = type;
-            (this._this_org__zwobble__mammoth__internal__styles__parsing__RegexTokeniser__TokenRule)._regex = regex;
+            this._type = type;
+            this._regex = regex;
         }
     }
 }
@@ -5012,17 +5007,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing {
             this._namespaces = namespaces;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement parseStream(Mammoth.Couscous.java.io.InputStream inputStream) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator nodeGenerator = this.create_NodeGenerator();
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator nodeGenerator = new Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator();
             Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.SimpleSax.parseStream(inputStream, nodeGenerator);
             return nodeGenerator.getRoot();
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement parseString(string value) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator nodeGenerator = this.create_NodeGenerator();
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator nodeGenerator = new Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator();
             Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.SimpleSax.parseString(value, nodeGenerator);
             return nodeGenerator.getRoot();
-        }
-        public Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator create_NodeGenerator() {
-            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.parsing.XmlParser__NodeGenerator(this);
         }
     }
 }

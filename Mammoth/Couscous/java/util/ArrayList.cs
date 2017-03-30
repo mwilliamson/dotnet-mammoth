@@ -48,5 +48,9 @@ namespace Mammoth.Couscous.java.util {
             _list.RemoveAt(index);
             return value;
         }
+        
+        public void set(int index, T value) {
+            _list[index] = value;
+        }
     }
 }
