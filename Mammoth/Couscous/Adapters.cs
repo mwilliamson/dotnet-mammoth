@@ -95,5 +95,37 @@ namespace Mammoth.Couscous {
                 Stream = stream;
             }
         }
+        
+        internal static java.util.Collection<T> CollectionToCollection<T>(ICollection<T> collection) {
+            return new CollectionToCollectionAdapter<T>(collection);
+        }
+        
+        private class CollectionToCollectionAdapter<T> : java.util.Collection<T> {
+            private readonly ICollection<T> _collection;
+            
+            internal CollectionToCollectionAdapter(ICollection<T> collection) {
+                _collection = collection;
+            }
+            
+            public bool isEmpty() {
+                return _collection.Count == 0;
+            }
+            
+            public int size() {
+                return _collection.Count;
+            }
+            
+            public bool contains(object value) {
+                return value is T && _collection.Contains((T) value);
+            }
+            
+            public Iterator<T> iterator() {
+                return ToJava.EnumeratorToIterator(_collection.GetEnumerator());
+            }
+            
+            public void add(T value) {
+                throw new UnsupportedOperationException();
+            }
+        }
     }
 }

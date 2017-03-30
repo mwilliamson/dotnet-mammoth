@@ -66,6 +66,8 @@
     <Compile Include="Couscous\java\util\function\Function.cs" />
     <Compile Include="Couscous\java\util\function\Predicate.cs" />
     <Compile Include="Couscous\java\util\function\Supplier.cs" />
+    <Compile Include="Couscous\java\util\regex\Matcher.cs" />
+    <Compile Include="Couscous\java\util\regex\Pattern.cs" />
     <Compile Include="Couscous\java\util\ArrayDeque.cs" />
     <Compile Include="Couscous\java\util\ArrayList.cs" />
     <Compile Include="Couscous\java\util\Arrays.cs" />
@@ -78,9 +80,11 @@
     <Compile Include="Couscous\java\util\Map.cs" />
     <Compile Include="Couscous\java\util\NoSuchElementException.cs" />
     <Compile Include="Couscous\java\util\Optional.cs" />
+    <Compile Include="Couscous\java\util\OptionalInt.cs" />
+    <Compile Include="Couscous\java\util\Queue.cs" />
     <Compile Include="Couscous\java\util\Set.cs" />
-    <Compile Include="Couscous\mammoth\internal\docx\InMemoryDocxFile.cs" />
-    <Compile Include="Couscous\mammoth\internal\docx\ZippedDocxFile.cs" />
+    <Compile Include="Couscous\mammoth\internal\archives\InMemoryArchive.cs" />
+    <Compile Include="Couscous\mammoth\internal\archives\ZippedArchive.cs" />
     <Compile Include="Couscous\mammoth\internal\styles\parsing\LineParseException.cs" />
     <Compile Include="Couscous\mammoth\internal\styles\parsing\ParseException.cs" />
     <Compile Include="Couscous\mammoth\internal\util\Base64Encoding.cs" />

@@ -1,4 +1,3 @@
-using System;
 using Mammoth.Couscous.java.util.function;
 
 namespace Mammoth.Couscous.java.util
@@ -8,9 +7,10 @@ namespace Mammoth.Couscous.java.util
 		bool isPresent();
 		Optional<U> map<U>(Function<T, U> function);
 		Optional<U> flatMap<U>(Function<T, Optional<U>> function);
+		Optional<T> filter(Predicate<T> predicate);
 		T orElse(T value);
 		T orElseGet(Supplier<T> supplier);
-		T orElseThrow<TException>(Supplier<TException> exceptionSupplier) where TException : Exception;
+		T orElseThrow<TException>(Supplier<TException> exceptionSupplier) where TException : System.Exception;
 		T get();
 		void ifPresent(Consumer<T> consumer);
     }
@@ -29,6 +29,10 @@ namespace Mammoth.Couscous.java.util
 		public Optional<U> flatMap<U>(Function<T, Optional<U>> function) {
 			return new None<U>();
 		}
+		
+		public Optional<T> filter(Predicate<T> predicate) {
+			return this;
+		}
 
 		public T orElse(T value) {
 			return value;
@@ -38,7 +42,7 @@ namespace Mammoth.Couscous.java.util
 			return supplier.get();
 		}
 		
-		public T orElseThrow<TException>(Supplier<TException> exceptionSupplier) where TException : Exception {
+		public T orElseThrow<TException>(Supplier<TException> exceptionSupplier) where TException : System.Exception {
 			throw exceptionSupplier.get();
 		}
 
@@ -68,6 +72,14 @@ namespace Mammoth.Couscous.java.util
 		public Optional<U> flatMap<U>(Function<T, Optional<U>> function) {
 			return function.apply(_value);
 		}
+		
+		public Optional<T> filter(Predicate<T> predicate) {
+			if (predicate.test(_value)) {
+				return this;
+			} else {
+				return None<T>.Instance;
+			}
+		}
 
 		public T orElse(T value) {
 			return _value;
@@ -77,7 +89,7 @@ namespace Mammoth.Couscous.java.util
 			return _value;
 		}
 		
-		public T orElseThrow<TException>(Supplier<TException> exceptionSupplier) where TException : Exception {
+		public T orElseThrow<TException>(Supplier<TException> exceptionSupplier) where TException : System.Exception {
 			return _value;
 		}
 

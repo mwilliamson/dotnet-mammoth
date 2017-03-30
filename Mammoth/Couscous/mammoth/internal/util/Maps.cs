@@ -25,6 +25,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util
             });
         }
         
+        internal static Map<K, V> map<K, V>(K key1, V value1, K key2, V value2, K key3, V value3) {
+            return ToJava.DictionaryToMap(new System.Collections.Generic.Dictionary<K, V> {
+                {key1, value1},
+                {key2, value2},
+                {key3, value3}
+            });
+        }
+        
         internal static Map<K, V> toMap<T, K, V>(Iterable<T> iterable, Function<T, Map__Entry<K, V>> function) {
             var dictionary = FromJava.IterableToEnumerable(iterable)
                 .Select(function.apply)

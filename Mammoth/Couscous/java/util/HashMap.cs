@@ -14,6 +14,9 @@ namespace Mammoth.Couscous.java.util {
             _dictionary = dictionary;
         }
         
+        internal HashMap(Map<TKey, TValue> map) : this(new Dictionary<TKey, TValue>(map.AsDictionary())) {
+        }
+        
         public void put(TKey key, TValue value) {
             _dictionary[key] = value;
         }
@@ -24,6 +27,10 @@ namespace Mammoth.Couscous.java.util {
         
         public Set<Map__Entry<TKey, TValue>> entrySet() {
             return new EntrySet(_dictionary);
+        }
+        
+        public Collection<TValue> values() {
+            return ToJava.CollectionToCollection(_dictionary.Values);
         }
         
         public Optional<TValue> _lookup(TKey key) {

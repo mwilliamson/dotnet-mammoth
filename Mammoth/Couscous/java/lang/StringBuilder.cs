@@ -7,6 +7,11 @@ namespace Mammoth.Couscous.java.lang {
             return this;
         }
         
+        internal StringBuilder append(char value) {
+            _builder.Append(value);
+            return this;
+        }
+        
         internal string toString() {
             return _builder.ToString();
         }

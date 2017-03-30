@@ -12,6 +12,9 @@ namespace Mammoth.Couscous.java.util {
             _list = list;
         }
         
+        internal ArrayList(List<T> list) : this(new System.Collections.Generic.List<T>(FromJava.IterableToEnumerable(list))) {
+        }
+        
         public Iterator<T> iterator() {
             return ToJava.EnumeratorToIterator(_list.GetEnumerator());
         }

@@ -26,6 +26,21 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util
 			}
 		}
 		
+		internal static Optional<T> tryGetLast<T>(Iterable<T> iterable) where T : class {
+			var hasElement = false;
+			T last = null;
+			var iterator = iterable.iterator();
+			while (iterator.hasNext()) {
+				hasElement = true;
+				last = iterator.next();
+			}
+			if (hasElement) {
+				return Optional.of(last);
+			} else {
+				return Optional.empty<T>();
+			}
+		}
+		
 		internal static Optional<T> tryFind<T>(Iterable<T> iterable, Predicate<T> predicate) {
 			var iterator = iterable.iterator();
 			while (iterator.hasNext()) {
@@ -35,6 +50,19 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util
 				}
 			}
 			return None<T>.Instance;
+		}
+		
+		internal static OptionalInt findIndex<T>(Iterable<T> iterable, Predicate<T> predicate) {
+			var iterator = iterable.iterator();
+			int index = 0;
+			while (iterator.hasNext()) {
+				T value = iterator.next();
+				if (predicate.test(value)) {
+					return new SomeInt(index);
+				}
+				index++;
+			}
+			return NoneInt.Instance;
 		}
 		
 		internal static Iterable<T> lazyFilter<T>(Iterable<T> iterable, Predicate<T> predicate) {

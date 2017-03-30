@@ -3,6 +3,7 @@ namespace Mammoth.Couscous.java.util {
 	void put(K key, V value);
 	bool containsKey(K key);
 	Set<Map__Entry<K, V>> entrySet();
+	Collection<V> values();
 	
         Optional<V> _lookup(K key);
 	System.Collections.Generic.IDictionary<K, V> AsDictionary();
