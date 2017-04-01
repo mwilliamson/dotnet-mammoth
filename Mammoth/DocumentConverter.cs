@@ -29,6 +29,10 @@ namespace Mammoth {
         public DocumentConverter DisableDefaultStyleMap() {
             return new DocumentConverter(options.disableDefaultStyleMap());
         }
+        
+        public DocumentConverter DisableEmbeddedStyleMap() {
+            return new DocumentConverter(options.disableEmbeddedStyleMap());
+        }
 
         public IResult<string> ConvertToHtml(Stream stream) {
             return new InternalDocumentConverter(options)

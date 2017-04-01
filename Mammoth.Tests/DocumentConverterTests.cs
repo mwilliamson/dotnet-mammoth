@@ -207,6 +207,14 @@ namespace Mammoth.Tests {
         }
 
         [Fact]
+        public void embeddedStyleMapsCanBeDisabled() {
+            AssertSuccessfulConversion(
+                ConvertToHtml("embedded-style-map.docx", mammoth => mammoth.DisableEmbeddedStyleMap()),
+                "<p>Walking on imported air</p>"
+            );
+        }
+
+        [Fact]
         public void CanExtractRawTextFromFile() {
             AssertSuccessfulConversion(
                 new DocumentConverter().ExtractRawText(TestFilePath("simple-list.docx")),
