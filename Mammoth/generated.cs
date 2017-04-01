@@ -4561,7 +4561,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> next(T type) {
             Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = (this._tokens).get(this._index);
-            if (token.getTokenType() == type) {
+            if ((token.getTokenType()).equals(type)) {
                 this._index = this._index + 1;
                 return token;
             } else {
@@ -4576,14 +4576,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
         }
         public void skip(T tokenType) {
             Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = (this._tokens).get(this._index);
-            if (!(token.getTokenType() == tokenType)) {
+            if (!(token.getTokenType()).equals(tokenType)) {
                 throw this.unexpectedTokenType(tokenType, token);
             }
             this._index = this._index + 1;
         }
         public void skip(T tokenType, string tokenValue) {
             Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = (this._tokens).get(this._index);
-            if (!(token.getTokenType() == tokenType)) {
+            if (!(token.getTokenType()).equals(tokenType)) {
                 throw this.unexpectedTokenType(tokenType, token);
             }
             string actualValue = token.getValue();
