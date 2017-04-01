@@ -3793,7 +3793,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles {
             this._prefix = prefix;
         }
         public bool matches(string value) {
-            return value.regionMatches(true, 0, this._prefix, 0, (this._prefix).Length);
+            return Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Strings.startsWithIgnoreCase(value, this._prefix);
         }
     }
 }

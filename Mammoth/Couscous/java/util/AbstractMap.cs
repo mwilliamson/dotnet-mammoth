@@ -22,12 +22,7 @@ namespace Mammoth.Couscous.java.util {
         }
         
         public override int GetHashCode() {
-            int hash = 17;
-            foreach (var entry in AsDictionary()) {
-                hash = hash * 23 + entry.Key.GetHashCode();
-                hash = hash * 23 + entry.Value.GetHashCode();
-            }
-            return hash;
+            throw new System.NotSupportedException();
         }
         
         public abstract void put(TKey key, TValue value);

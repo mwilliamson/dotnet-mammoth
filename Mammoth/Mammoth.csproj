@@ -100,6 +100,7 @@
     <Compile Include="Couscous\mammoth\internal\util\Streams.cs" />
     <Compile Include="Couscous\mammoth\internal\util\Strings.cs" />
     <Compile Include="Couscous\mammoth\internal\util\Iterables.cs" />
+    <Compile Include="Couscous\mammoth\internal\xml\XmlWriter.cs" />
     <Compile Include="Couscous\mammoth\internal\xml\parsing\SimpleSax.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

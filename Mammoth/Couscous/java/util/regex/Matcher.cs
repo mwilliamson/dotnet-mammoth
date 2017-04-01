@@ -23,7 +23,14 @@ namespace Mammoth.Couscous.java.util.regex {
         }
         
         internal bool find() {
-            
+            var match = _regex.Match(_value, _regionStart);
+            if (match.Success) {
+                _lastMatch = match;
+                _regionStart = end();
+                return true;
+            } else {
+                return false;
+            }
         }
         
         internal string group() {
@@ -38,12 +45,24 @@ namespace Mammoth.Couscous.java.util.regex {
             return _lastMatch.Groups.Count - 1;
         }
         
+        internal int start() {
+            return _lastMatch.Index;
+        }
+        
         internal int end() {
             return _lastMatch.Index + _lastMatch.Length;
         }
         
         internal int regionStart() {
             return _regionStart;
+        }
+        
+        internal void region(int start, int end) {
+            if (end == _value.Length) {
+                _regionStart = start;
+            } else {
+                throw new System.NotSupportedException();
+            }
         }
     }
 }
