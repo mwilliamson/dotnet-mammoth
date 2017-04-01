@@ -38,11 +38,12 @@ namespace Mammoth.Couscous.java.util.regex {
         }
         
         internal string group(int groupIndex) {
-            return _lastMatch.Groups[groupIndex].Value;
+            var group = _lastMatch.Groups[groupIndex];
+            return group.Success ? group.Value : null;
         }
         
         internal int groupCount() {
-            return _lastMatch.Groups.Count - 1;
+            return _regex.GetGroupNumbers().Length - 1;
         }
         
         internal int start() {
