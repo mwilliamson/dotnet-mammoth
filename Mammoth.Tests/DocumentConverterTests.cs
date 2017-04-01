@@ -191,6 +191,14 @@ namespace Mammoth.Tests {
         }
 
         [Fact]
+        public void ExplicitStyleMapTakesPrecedenceOverEmbeddedStyleMap() {
+            AssertSuccessfulConversion(
+                ConvertToHtml("embedded-style-map.docx", mammoth => mammoth.AddStyleMap("p => p")),
+                "<p>Walking on imported air</p>"
+            );
+        }
+
+        [Fact]
         public void CanExtractRawTextFromFile() {
             AssertSuccessfulConversion(
                 new DocumentConverter().ExtractRawText(TestFilePath("simple-list.docx")),
