@@ -15,5 +15,9 @@ namespace Mammoth.Couscous.java.lang {
         internal string toString() {
             return _builder.ToString();
         }
+        
+        internal void setLength(int length) {
+            _builder.Length = length;
+        }
     }
 }
