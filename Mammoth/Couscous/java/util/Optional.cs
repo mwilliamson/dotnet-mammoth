@@ -14,9 +14,20 @@ namespace Mammoth.Couscous.java.util
 		T get();
 		void ifPresent(Consumer<T> consumer);
     }
+    
+    internal interface None {
+	}
 
-	internal struct None<T> : Optional<T> {
+	internal struct None<T> : None, Optional<T> {
 		internal static readonly None<T> Instance = new None<T>();
+		
+        public override bool Equals(object other) {
+			return other is None;
+        }
+        
+        public override int GetHashCode() {
+			return 0;
+		}
 		
 		public bool isPresent() {
 			return false;
@@ -53,12 +64,29 @@ namespace Mammoth.Couscous.java.util
 		public void ifPresent(Consumer<T> consumer) {
 		}
 	}
+	
+	internal interface Some {
+		object getObject();
+	}
 
-	internal struct Some<T> : Optional<T> {
+	internal struct Some<T> : Some, Optional<T> {
 		private readonly T _value;
 
 		internal Some(T value) {
 			_value = value;
+		}
+		
+        public override bool Equals(object other) {
+			var otherSome = other as Some;
+			if (otherSome == null) {
+				return false;
+			} else {
+				return _value.Equals(otherSome.getObject());
+			}
+        }
+        
+        public override int GetHashCode() {
+			return _value.GetHashCode();
 		}
 
 		public bool isPresent() {
@@ -94,6 +122,10 @@ namespace Mammoth.Couscous.java.util
 		}
 
 		public T get() {
+			return _value;
+		}
+
+		public object getObject() {
 			return _value;
 		}
 		

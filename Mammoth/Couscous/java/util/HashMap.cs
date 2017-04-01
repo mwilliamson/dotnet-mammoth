@@ -4,36 +4,36 @@ using Mammoth.Couscous.org.zwobble.mammoth.@internal.util;
 using Mammoth.Couscous.java.lang;
 
 namespace Mammoth.Couscous.java.util {
-    internal class HashMap<TKey, TValue> : Map<TKey, TValue> {
-        private readonly IDictionary<TKey, TValue> _dictionary;
+    internal class HashMap<TKey, TValue> : AbstractMap<TKey, TValue> {
+        private readonly Dictionary<TKey, TValue> _dictionary;
         
         internal HashMap() : this(new Dictionary<TKey, TValue>()) {
         }
         
-        internal HashMap(IDictionary<TKey, TValue> dictionary) {
+        internal HashMap(Dictionary<TKey, TValue> dictionary) {
             _dictionary = dictionary;
         }
         
         internal HashMap(Map<TKey, TValue> map) : this(new Dictionary<TKey, TValue>(map.AsDictionary())) {
         }
         
-        public void put(TKey key, TValue value) {
+        public override void put(TKey key, TValue value) {
             _dictionary[key] = value;
         }
         
-        public bool containsKey(TKey key) {
+        public override bool containsKey(TKey key) {
             return _dictionary.ContainsKey(key);
         }
         
-        public Set<Map__Entry<TKey, TValue>> entrySet() {
+        public override Set<Map__Entry<TKey, TValue>> entrySet() {
             return new EntrySet(_dictionary);
         }
         
-        public Collection<TValue> values() {
+        public override Collection<TValue> values() {
             return ToJava.CollectionToCollection(_dictionary.Values);
         }
         
-        public Optional<TValue> _lookup(TKey key) {
+        public override Optional<TValue> _lookup(TKey key) {
             if (_dictionary.ContainsKey(key)) {
                 return new Some<TValue>(_dictionary[key]);
             } else {
@@ -41,7 +41,11 @@ namespace Mammoth.Couscous.java.util {
             }
         }
         
-        public IDictionary<TKey, TValue> AsDictionary() {
+        public override IDictionary<TKey, TValue> AsDictionary() {
+            return _dictionary;
+        }
+        
+        public override System.Collections.IDictionary AsUntypedDictionary() {
             return _dictionary;
         }
         

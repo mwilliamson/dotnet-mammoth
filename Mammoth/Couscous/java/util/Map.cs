@@ -1,4 +1,8 @@
 namespace Mammoth.Couscous.java.util {
+    internal interface Map {
+	System.Collections.IDictionary AsUntypedDictionary();
+    }
+    
     internal interface Map<K, V> {
 	void put(K key, V value);
 	bool containsKey(K key);

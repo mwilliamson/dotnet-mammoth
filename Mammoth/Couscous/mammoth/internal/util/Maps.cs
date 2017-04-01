@@ -118,7 +118,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util
         }
         
         internal class Builder<K, V> {
-            private readonly System.Collections.Generic.IDictionary<K, V> _values = new System.Collections.Generic.Dictionary<K, V>();
+            private readonly System.Collections.Generic.Dictionary<K, V> _values = new System.Collections.Generic.Dictionary<K, V>();
             
             internal Builder<K, V> put(K key, V value) {
                 _values[key] = value;

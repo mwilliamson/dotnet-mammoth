@@ -68,6 +68,7 @@
     <Compile Include="Couscous\java\util\function\Supplier.cs" />
     <Compile Include="Couscous\java\util\regex\Matcher.cs" />
     <Compile Include="Couscous\java\util\regex\Pattern.cs" />
+    <Compile Include="Couscous\java\util\AbstractMap.cs" />
     <Compile Include="Couscous\java\util\ArrayDeque.cs" />
     <Compile Include="Couscous\java\util\ArrayList.cs" />
     <Compile Include="Couscous\java\util\Arrays.cs" />
