@@ -54,9 +54,16 @@ namespace Mammoth.Tests {
         }
 
         [Fact]
-        public void InlineImagesAreIncludedInOutput() {
+        public void InlineImagesReferencedByPathRelativeToPartAreIncludedInOutput() {
             AssertSuccessfulConversion(
                 ConvertToHtml("tiny-picture.docx"),
+                "<p><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOvgAADr4B6kKxwAAAABNJREFUKFNj/M+ADzDhlWUYqdIAQSwBE8U+X40AAAAASUVORK5CYII=\" /></p>");
+        }
+
+        [Fact]
+        public void InlineImagesReferencedByPathRelativeToBaseAreIncludedInOutput() {
+            AssertSuccessfulConversion(
+                ConvertToHtml("tiny-picture-target-base-relative.docx"),
                 "<p><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOvgAADr4B6kKxwAAAABNJREFUKFNj/M+ADzDhlWUYqdIAQSwBE8U+X40AAAAASUVORK5CYII=\" /></p>");
         }
 
