@@ -92,6 +92,42 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util
 				.Concat(FromJava.IterableToEnumerable(second));
 			return ToJava.EnumerableToIterable(enumerable);
 		}
+		
+		internal static Iterable<int> intRange(int start, int end) {
+			return new IntRange(start, end);
+		}
+		
+		private class IntRange : Iterable<int> {
+			private readonly int _start;
+			private readonly int _end;
+			
+			internal IntRange(int start, int end) {
+				_start = start;
+				_end = end;
+			}
+			
+			public Iterator<int> iterator() {
+				return new IntRangeIterator(_start, _end);
+			}
+		}
+		
+		private class IntRangeIterator : Iterator<int> {
+			private int _next;
+			private readonly int _end;
+			
+			internal IntRangeIterator(int start, int end) {
+				_next = start;
+				_end = end;
+			}
+			
+			public bool hasNext() {
+				return _next < _end;
+			}
+			
+			public int next() {
+				return _next++;
+			}
+		}
 	}
 }
 
