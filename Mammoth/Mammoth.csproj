@@ -79,6 +79,7 @@
     <Compile Include="Couscous\java\util\List.cs" />
     <Compile Include="Couscous\java\util\Map.cs" />
     <Compile Include="Couscous\java\util\NoSuchElementException.cs" />
+    <Compile Include="Couscous\java\util\Objects.cs" />
     <Compile Include="Couscous\java\util\Optional.cs" />
     <Compile Include="Couscous\java\util\OptionalInt.cs" />
     <Compile Include="Couscous\java\util\Queue.cs" />
