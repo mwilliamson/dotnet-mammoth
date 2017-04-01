@@ -39,6 +39,8 @@ The following features are currently supported:
 * Text boxes. The contents of the text box are treated as a separate paragraph
   that appears after the paragraph containing the text box.
 
+* Comments.
+
 ## Installation
 
 Available on [NuGet](https://www.nuget.org/packages/Mammoth/).
@@ -173,6 +175,22 @@ For instance, to wrap strikethrough text in `<del>` tags:
 var converter = new DocumentConverter()
     .AddStyleMap("strike => del");
 ```
+
+#### Comments
+ 
+By default, comments are ignored.
+To include comments in the generated HTML,
+add a style mapping for `comment-reference`.
+For instance:
+
+```csharp
+var converter = new DocumentConverter()
+    .AddStyleMap("comment-reference => sup");
+```
+
+Comments will be appended to the end of the document,
+with links to the comments wrapped using the specified style mapping.
+
 ### API
 
 #### `DocumentConverter`
@@ -186,12 +204,12 @@ Methods:
   to other files, such as images, cannot be resolved.
 
 * `IResult<string> ExtractRawText(string path)`:
-  Extract the raw text of the document.
+  extract the raw text of the document.
   This will ignore all formatting in the document.
   Each paragraph is followed by two newlines.
 
 * `IResult<string> ExtractRawText(Stream stream)`:
-  Extract the raw text of the document.
+  extract the raw text of the document.
   This will ignore all formatting in the document.
   Each paragraph is followed by two newlines.
 
@@ -203,6 +221,10 @@ Methods:
 * `DocumentConverter DisableDefaultStyleMap()`: by default,
   any added style maps are combined with the default style map.
   Call this to stop using the default style map altogether.
+
+* `DocumentConverter DisableEmbeddedStyleMap()`: by default,
+  if the document contains an embedded style map, then it is combined with the default style map.
+  Call this to ignore any embedded style maps.
 
 * `DocumentConverter PreserveEmptyParagraphs()`: by default, empty paragraphs are ignored.
   Call this to preserve empty paragraphs in the output.
@@ -284,6 +306,13 @@ For instance, to match a paragraph with the style name `Heading 1`:
 
 ```
 p[style-name='Heading 1']
+```
+
+You can also match a style name by prefix.
+For instance, to match a paragraph where the style name starts with `Heading`:
+
+```
+p[style-name^='Heading']
 ```
 
 Styles can also be referenced by style ID.
@@ -370,6 +399,27 @@ Modifiers must be used in the correct order:
 h1.section-title:fresh
 ```
 
+#### Separators
+
+To specify a separator to place between the contents of paragraphs that are collapsed together,
+use `:separator('SEPARATOR STRING')`.
+
+For instance, suppose a document contains a block of code where each line of code is a paragraph with the style `Code Block`.
+We can write a style mapping to map such paragraphs to `<pre>` elements:
+
+```
+p[style-name='Code Block'] => pre
+```
+
+Since `pre` isn't marked as `:fresh`,
+consecutive `pre` elements will be collapsed together.
+However, this results in the code all being on one line.
+We can use `:separator` to insert a newline between each line of code:
+
+```
+p[style-name='Code Block'] => pre:separator('\n')
+```
+
 #### Nested elements
 
 Use `>` to specify nested elements.
@@ -380,15 +430,3 @@ div.aside > h2
 ```
 
 You can nest elements to any depth.
-
-## Missing features
-
-Compared to the JavaScript and Python implementations, the following features
-are currently missing:
-
-* Custom image handlers
-* CLI
-* Embedded style map support
-* Markdown support
-* Document transforms
-
