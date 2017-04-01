@@ -3,7 +3,7 @@ namespace Mammoth.Couscous.java.util {
 	System.Collections.IDictionary AsUntypedDictionary();
     }
     
-    internal interface Map<K, V> {
+    internal interface Map<K, V> : Map {
 	void put(K key, V value);
 	bool containsKey(K key);
 	Set<Map__Entry<K, V>> entrySet();

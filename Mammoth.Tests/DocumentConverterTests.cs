@@ -162,7 +162,7 @@ namespace Mammoth.Tests {
 	    var exception = Assert.ThrowsAny<Exception>(() =>
 		new DocumentConverter().AddStyleMap("p =>\np[style-name=] =>"));
 	    Assert.Equal(
-		"error reading style map at line 2, character 14: expected token of type _STRING but was of type _CLOSE_SQUARE_BRACKET\n\n" +
+		"error reading style map at line 2, character 14: expected token of type _STRING but was of type _SYMBOL\n\n" +
                 "p[style-name=] =>\n" +
                 "             ^",
 		exception.Message);
