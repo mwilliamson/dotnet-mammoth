@@ -2247,7 +2247,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             this._file = file;
             this._fileReader = fileReader;
             this._currentInstrText = new Mammoth.Couscous.java.lang.StringBuilder();
-            this._complexFieldStack = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Queues.arrayQueue<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField>();
+            this._complexFieldStack = Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Queues.stack<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField>();
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readElement(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
             switch (element.getName()) {
@@ -4575,7 +4575,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             this._index = this._index + 1;
         }
         public void skip(T tokenType) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token token = (this._tokens).get(this._index);
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = (this._tokens).get(this._index);
             if (!(token.getTokenType() == tokenType)) {
                 throw this.unexpectedTokenType(tokenType, token);
             }
