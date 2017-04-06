@@ -31,11 +31,8 @@ namespace Mammoth.Couscous.java.net {
                 return new URI(new Uri(_uri, relativeUri));
             } else {
                 var path = _uri.ToString();
-                var lastSlashIndex = path.LastIndexOf("/");
-                var basePath = lastSlashIndex == -1
-                    ?  "."
-                    : path.Substring(0, lastSlashIndex + 1);
-                return new URI(basePath + relativeUri);
+                var basePath = System.IO.Path.GetDirectoryName(path);
+                return new URI(System.IO.Path.Combine(basePath, relativeUri));
             }
         }
     }
