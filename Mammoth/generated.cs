@@ -2291,6 +2291,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 case "w:sdt":
                     return this.readSdt(element);
                 case "w:ins":
+                case "w:object":
                 case "w:smartTag":
                 case "w:drawing":
                 case "v:roundrect":
@@ -2369,12 +2370,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult readFieldChar(Mammoth.Couscous.org.zwobble.mammoth.@internal.xml.XmlElement element) {
             string type = (element.getAttributeOrNone("w:fldCharType")).orElse("");
             if (type.Equals("begin")) {
+                (this._complexFieldStack).add(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static._UNKNOWN);
                 (this._currentInstrText).setLength(0);
             } else if (type.Equals("end")) {
                 (this._complexFieldStack).remove();
             } else if (type.Equals("separate")) {
                 string instrText = (this._currentInstrText).toString();
                 Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField complexField = ((this.parseHyperlinkFieldCode(instrText)).map<Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__Anonymous_8())).orElse(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static._UNKNOWN);
+                (this._complexFieldStack).remove();
                 (this._complexFieldStack).add(complexField);
             }
             return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult._EMPTY_SUCCESS;
@@ -4430,7 +4433,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             (Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.StyleMapParser.parseStyleMapping(line)).accept(styleMap);
         }
         public static Mammoth.Couscous.java.util.function.Consumer<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder> parseStyleMapping(string line) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.StyleMappingTokeniser.tokenise(line));
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokens = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.StyleMappingTokeniser.tokenise(line);
             Mammoth.Couscous.java.util.function.BiConsumer<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.StyleMapBuilder, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.HtmlPath> documentMatcher = Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.DocumentMatcherParser.parse(tokens);
             tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._WHITESPACE);
             tokens.skip(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, "=>");
@@ -4479,13 +4482,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class StyleMappingTokeniser {
-        public static Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>> tokenise(string line) {
+        public static Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokenise(string line) {
+            return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.StyleMappingTokeniser.tokeniseToList(line), new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(line.Length, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._EOF, ""));
+        }
+        public static Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>> tokeniseToList(string line) {
             string stringPrefix = "'(?:(?:\\\\.|[^'])*)";
             string identifierCharacter = "(?:[a-zA-Z\\-_]|\\\\.)";
             Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokeniser = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._UNKNOWN, Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>[] {Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._IDENTIFIER, ((identifierCharacter + "(?:") + identifierCharacter) + "|[0-9])*"), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, ":|>|=>|\\^=|=|\\(|\\)|\\[|\\]|\\||!|\\."), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._WHITESPACE, "\\s+"), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._STRING, stringPrefix + "'"), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._UNTERMINATED_STRING, stringPrefix), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._INTEGER, "[0-9]+")}));
-            Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>> tokens = tokeniser.tokenise(line);
-            tokens.add(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(line.Length, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._EOF, ""));
-            return tokens;
+            return tokeniser.tokenise(line);
         }
     }
 }
@@ -4526,19 +4530,17 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
     internal class TokenIterator<T> {
         internal Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T>> _tokens;
+        internal Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> _end;
         internal int _index;
-        internal TokenIterator(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T>> tokens) {
+        internal TokenIterator(Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T>> tokens, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> end) {
             this._tokens = tokens;
+            this._end = end;
             this._index = 0;
         }
         public bool isNext(int offset, T tokenType, string value) {
             int tokenIndex = this._index + offset;
-            if (tokenIndex < (this._tokens).size()) {
-                Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = (this._tokens).get(tokenIndex);
-                return (token.getTokenType()).equals(tokenType) && ((token.getValue()).Equals(value));
-            } else {
-                return false;
-            }
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = this.getToken(tokenIndex);
+            return (token.getTokenType()).equals(tokenType) && ((token.getValue()).Equals(value));
         }
         public bool isNext(T tokenType, string value) {
             return this.isNext(0, tokenType, value);
@@ -4552,15 +4554,15 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             }
         }
         public T peekTokenType() {
-            return ((this._tokens).get(this._index)).getTokenType();
+            return (this.getToken(this._index)).getTokenType();
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> next() {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = (this._tokens).get(this._index);
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = this.getToken(this._index);
             this._index = this._index + 1;
             return token;
         }
         public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> next(T type) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = (this._tokens).get(this._index);
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = this.getToken(this._index);
             if ((token.getTokenType()).equals(type)) {
                 this._index = this._index + 1;
                 return token;
@@ -4575,14 +4577,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             this._index = this._index + 1;
         }
         public void skip(T tokenType) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = (this._tokens).get(this._index);
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = this.getToken(this._index);
             if (!(token.getTokenType()).equals(tokenType)) {
                 throw this.unexpectedTokenType(tokenType, token);
             }
             this._index = this._index + 1;
         }
         public void skip(T tokenType, string tokenValue) {
-            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = (this._tokens).get(this._index);
+            Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> token = this.getToken(this._index);
             if (!(token.getTokenType()).equals(tokenType)) {
                 throw this.unexpectedTokenType(tokenType, token);
             }
@@ -4603,6 +4605,13 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             } catch (Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.LineParseException exception) {
                 this._index = originalIndex;
                 return false;
+            }
+        }
+        public Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<T> getToken(int index) {
+            if (index < (this._tokens).size()) {
+                return (this._tokens).get(index);
+            } else {
+                return this._end;
             }
         }
     }
