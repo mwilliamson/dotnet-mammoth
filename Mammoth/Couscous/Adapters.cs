@@ -76,6 +76,10 @@ namespace Mammoth.Couscous {
             }
         }
         
+        internal static Map<TKey, TValue> DictionaryToMap<TKey, TValue>(IDictionary<TKey, TValue> dictionary) {
+            return new HashMap<TKey, TValue>(new Dictionary<TKey, TValue>(dictionary));
+        }
+        
         internal static Map<TKey, TValue> DictionaryToMap<TKey, TValue>(Dictionary<TKey, TValue> dictionary) {
             return new HashMap<TKey, TValue>(dictionary);
         }

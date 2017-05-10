@@ -2,6 +2,7 @@
 using System.IO;
 using Xunit.Sdk;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Mammoth.Tests {
@@ -96,6 +97,28 @@ namespace Mammoth.Tests {
             } finally {
                 Directory.Delete(tempDirectory, recursive: true);
             }
+        }
+        
+        [Fact]
+        public void ImageConversionCanBeCustomised() {
+            AssertSuccessfulConversion(
+                ConvertToHtml("tiny-picture.docx", mammoth => mammoth.ImageConverter(ConvertImage)),
+                "<p><img src=\"iV,image/png\" /></p>"
+            );
+        }
+        
+        private IDictionary<string, string> ConvertImage(IImage image) {
+            using (var stream = image.GetStream()) {
+                var base64 = StreamToBase64(stream);
+                var src = base64.Substring(0, 2) + "," + image.ContentType;
+                return new Dictionary<string, string> { { "src", src } };
+            }
+        }
+        
+        private static string StreamToBase64(System.IO.Stream stream) {
+            var memoryStream = new System.IO.MemoryStream();
+            stream.CopyTo(memoryStream);
+            return System.Convert.ToBase64String(memoryStream.ToArray());
         }
 
         [Fact]

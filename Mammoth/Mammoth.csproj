@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DocumentConverter.cs" />
+    <Compile Include="IImage.cs" />
     <Compile Include="IResult.cs" />
     <Compile Include="SimpleResult.cs" />
     <Compile Include="generated.cs" />
