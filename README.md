@@ -131,6 +131,26 @@ var converter = new DocumentConverter()
     .DisableDefaultStyleMap();
 ```
 
+#### Custom image handlers
+
+By default, images are converted to `<img>` elements with the source included inline in the `src` attribute.
+This behaviour can be changed by calling `ImageConverter()` with an [image converter](#image-converters) .
+
+For instance, the following would replicate the default behaviour:
+
+```csharp
+var converter = new DocumentConverter()
+    .ImageConverter(image => {
+        using (var stream = image.GetStream()) {
+          var base64 = StreamToBase64(stream);
+          var src = "data:" + image.ContentType + ";base64," + base64;
+          return new Dictionary<string, string> { { "src", src } };
+        }
+    });
+```
+
+where `StreamToBase64` is a function that reads a stream and encodes it as a Base64 string.
+
 #### Bold
 
 By default, bold text is wrapped in `<strong>` tags.
@@ -241,6 +261,39 @@ Represents the result of a conversion. Properties:
 * `T Value`: the generated text.
 
 * `ISet<string> Warnings`: any warnings generated during the conversion.
+
+#### Image converters
+
+An image converter is a function with the signature `Func<IImage, IDictionary<string, string>>`.
+This creates an `<img>` element for each image in the original docx.
+The argument is the image element being converted,
+and has the following members:
+
+* `Stream GetStream()`: open the image file.
+
+* `String ContentType`: the content type of the image, such as `image/png`.
+
+* `String AltText`: the alt text of the image, if any.
+
+The function should return an `IDictionary` of attributes for the `<img>` element.
+At a minimum, this should include the `src` attribute.
+If any alt text is found for the image,
+this will be automatically added to the element's attributes.
+
+For instance, the following would replicate the default behaviour:
+
+```csharp
+var converter = new DocumentConverter()
+    .ImageConverter(image => {
+        using (var stream = image.GetStream()) {
+          var base64 = StreamToBase64(stream);
+          var src = "data:" + image.ContentType + ";base64," + base64;
+          return new Dictionary<string, string> { { "src", src } };
+        }
+    });
+```
+
+where `StreamToBase64` is a function that reads a stream and encodes it as a Base64 string.
 
 ## Writing style maps
 
