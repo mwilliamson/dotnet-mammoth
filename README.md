@@ -142,9 +142,9 @@ For instance, the following would replicate the default behaviour:
 var converter = new DocumentConverter()
     .ImageConverter(image => {
         using (var stream = image.GetStream()) {
-          var base64 = StreamToBase64(stream);
-          var src = "data:" + image.ContentType + ";base64," + base64;
-          return new Dictionary<string, string> { { "src", src } };
+            var base64 = StreamToBase64(stream);
+            var src = "data:" + image.ContentType + ";base64," + base64;
+            return new Dictionary<string, string> { { "src", src } };
         }
     });
 ```
@@ -286,9 +286,9 @@ For instance, the following would replicate the default behaviour:
 var converter = new DocumentConverter()
     .ImageConverter(image => {
         using (var stream = image.GetStream()) {
-          var base64 = StreamToBase64(stream);
-          var src = "data:" + image.ContentType + ";base64," + base64;
-          return new Dictionary<string, string> { { "src", src } };
+            var base64 = StreamToBase64(stream);
+            var src = "data:" + image.ContentType + ";base64," + base64;
+            return new Dictionary<string, string> { { "src", src } };
         }
     });
 ```
