@@ -46,13 +46,23 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util
                 .ToDictionary(function.apply);
             return ToJava.DictionaryToMap(dictionary);
         }
-        
+
         internal static Map<K, java.util.List<T>> toMultiMapWithKey<T, K>(Iterable<T> iterable, Function<T, K> function) {
             var dictionary = FromJava.IterableToEnumerable(iterable)
                 .GroupBy(value => function.apply(value))
                 .ToDictionary(
                     grouping => grouping.Key,
                     grouping => ToJava.ListToList(grouping.ToList()));
+            return ToJava.DictionaryToMap(dictionary);
+        }
+    
+        internal static Map<K, java.util.List<V>> toMultiMap<T, K, V>(Iterable<T> iterable, Function<T, Map__Entry<K, V>> function) {
+            var dictionary = FromJava.IterableToEnumerable(iterable)
+                .Select(element => function.apply(element))
+                .GroupBy(entry => entry.getKey())
+                .ToDictionary(
+                    grouping => grouping.Key,
+                    grouping => ToJava.ListToList(grouping.Select(entry => entry.getValue()).ToList()));
             return ToJava.DictionaryToMap(dictionary);
         }
         
@@ -128,6 +138,12 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util
             internal Map<K, V> build() {
                 return ToJava.DictionaryToMap(_values);
             }
+        }
+        
+        internal static Map<K, V> mutableMap<K, V>(K key1, V value1) {
+            var map = new HashMap<K, V>();
+            map.put(key1, value1);
+            return map;
         }
     }
 }

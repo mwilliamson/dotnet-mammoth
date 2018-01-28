@@ -29,5 +29,13 @@ namespace Mammoth.Couscous {
         internal static string[] split(this string value, string separator) {
             return System.Text.RegularExpressions.Regex.Split(value, separator);
         }
+        
+        internal static int indexOf(this string value, string search) {
+            return value.IndexOf(search);
+        }
+        
+        internal static int lastIndexOf(this string value, string search) {
+            return value.LastIndexOf(search);
+        }
     }
 }

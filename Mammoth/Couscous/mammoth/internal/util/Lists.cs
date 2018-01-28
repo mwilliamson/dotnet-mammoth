@@ -13,6 +13,13 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
             return ToJava.ListToList(FromJava.IterableToEnumerable(iterable).ToList());
         }
         
+        internal static List<T> eagerFilter<T>(Iterable<T> iterable, Predicate<T> function) {
+            var result = FromJava.IterableToEnumerable(iterable)
+                .Where(function.test)
+                .ToList();
+            return ToJava.ListToList(result);
+        }
+        
         internal static List<U> eagerMap<T, U>(Iterable<T> iterable, Function<T, U> function) {
             var result = FromJava.IterableToEnumerable(iterable)
                 .Select(function.apply)
@@ -61,6 +68,14 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util {
                 .OrderBy(getKey.apply)
                 .ToList();
             return ToJava.ListToList(result);
+        }
+        
+        internal static Optional<T> tryGetFirst<T>(List<T> list) {
+            if (list.isEmpty()) {
+                return None<T>.Instance;
+            } else {
+                return new Some<T>(list.get(0));
+            }
         }
         
         internal static Optional<T> tryGetLast<T>(List<T> list) {

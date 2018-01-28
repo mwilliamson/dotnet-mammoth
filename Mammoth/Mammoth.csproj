@@ -65,6 +65,7 @@
     <Compile Include="Couscous\java\util\function\BiPredicate.cs" />
     <Compile Include="Couscous\java\util\function\Consumer.cs" />
     <Compile Include="Couscous\java\util\function\Function.cs" />
+    <Compile Include="Couscous\java\util\function\IntFunction.cs" />
     <Compile Include="Couscous\java\util\function\Predicate.cs" />
     <Compile Include="Couscous\java\util\function\Supplier.cs" />
     <Compile Include="Couscous\java\util\regex\Matcher.cs" />

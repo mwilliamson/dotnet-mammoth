@@ -23,6 +23,10 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.archives {
             }
         }
         
+        public bool exists(string name) {
+            return _zipFile.GetEntry(name) != null;
+        }
+        
         public void close() {
             _zipFile.Dispose();
         }

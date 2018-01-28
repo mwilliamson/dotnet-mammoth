@@ -6,6 +6,7 @@ namespace Mammoth.Couscous.java.util
 	{
 		bool isPresent();
 		int getAsInt();
+		int orElse(int elseValue);
     }
 
 	internal struct NoneInt : OptionalInt {
@@ -17,6 +18,10 @@ namespace Mammoth.Couscous.java.util
 
 		public int getAsInt() {
 			throw new NoSuchElementException();
+		}
+		
+		public int orElse(int elseValue) {
+			return elseValue;
 		}
 	}
 
@@ -32,6 +37,10 @@ namespace Mammoth.Couscous.java.util
 		}
 
 		public int getAsInt() {
+			return _value;
+		}
+		
+		public int orElse(int elseValue) {
 			return _value;
 		}
 	}

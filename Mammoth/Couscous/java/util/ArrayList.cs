@@ -39,6 +39,15 @@ namespace Mammoth.Couscous.java.util {
             }
         }
         
+        public List<T> subList(int fromIndex, int toIndex) {
+            var list = _list as System.Collections.Generic.List<T>;
+            if (list == null) {
+                throw new System.NotImplementedException();
+            } else {
+                return new ArrayList<T>(list.GetRange(fromIndex, toIndex - fromIndex));
+            }
+        }
+        
         public void add(T value) {
             _list.Add(value);
         }
@@ -51,6 +60,10 @@ namespace Mammoth.Couscous.java.util {
         
         public void set(int index, T value) {
             _list[index] = value;
+        }
+        
+        public void clear() {
+            _list.Clear();
         }
     }
 }
