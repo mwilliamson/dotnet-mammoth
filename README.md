@@ -197,7 +197,7 @@ var converter = new DocumentConverter()
 ```
 
 #### Comments
- 
+
 By default, comments are ignored.
 To include comments in the generated HTML,
 add a style mapping for `comment-reference`.
@@ -483,3 +483,12 @@ div.aside > h2
 ```
 
 You can nest elements to any depth.
+
+#### Ignoring document elements
+
+Use `!` to ignore a document element.
+For instance, to ignore any paragraph with the style `Comment`:
+
+```
+p[style-name='Comment'] => !
+```
