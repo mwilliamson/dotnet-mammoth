@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mammoth", "Mammoth\Mammoth.csproj", "{51C5CBD6-8809-4D5E-BABE-1787A16F5ED8}"
-EndProject
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30428.66
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mammoth.Cli", "Mammoth.Cli\Mammoth.Cli.csproj", "{20602E78-EEBD-407B-B8C3-EDB6254BD663}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mammoth.Tests", "Mammoth.Tests\Mammoth.Tests.csproj", "{E9C3EA8B-FF3B-4E3E-8137-1510465200B5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mammoth", "Mammoth\Mammoth.csproj", "{ADF3AF58-6F05-4D06-ABD0-25AAA1FAC499}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,13 +19,19 @@ Global
 		{20602E78-EEBD-407B-B8C3-EDB6254BD663}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20602E78-EEBD-407B-B8C3-EDB6254BD663}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20602E78-EEBD-407B-B8C3-EDB6254BD663}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51C5CBD6-8809-4D5E-BABE-1787A16F5ED8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51C5CBD6-8809-4D5E-BABE-1787A16F5ED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51C5CBD6-8809-4D5E-BABE-1787A16F5ED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51C5CBD6-8809-4D5E-BABE-1787A16F5ED8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E9C3EA8B-FF3B-4E3E-8137-1510465200B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E9C3EA8B-FF3B-4E3E-8137-1510465200B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9C3EA8B-FF3B-4E3E-8137-1510465200B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9C3EA8B-FF3B-4E3E-8137-1510465200B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADF3AF58-6F05-4D06-ABD0-25AAA1FAC499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADF3AF58-6F05-4D06-ABD0-25AAA1FAC499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADF3AF58-6F05-4D06-ABD0-25AAA1FAC499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADF3AF58-6F05-4D06-ABD0-25AAA1FAC499}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {303F01B6-7EB3-4672-8BCC-BE6F16F422E8}
 	EndGlobalSection
 EndGlobal
