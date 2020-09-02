@@ -2,7 +2,7 @@ sudo: false
 language: csharp
 dist: bionic
 mono: none
-dotnet: 2.1.21
+dotnet: 2.1
 script:
   - dotnet restore
   - dotnet build
