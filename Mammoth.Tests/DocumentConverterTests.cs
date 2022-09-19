@@ -269,7 +269,7 @@ namespace Mammoth.Tests {
         }
 
         private string TestFilePath(string name) {
-            return Path.Combine("../../TestData", name);
+            return Path.Combine("../../../TestData", name);
         }
     }
 }
