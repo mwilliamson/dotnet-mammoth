@@ -6,7 +6,7 @@
     <Product>Mammoth</Product>
     <Description>Convert Word documents from docx to simple HTML</Description>
     <Copyright>Copyright 2015 - 2016 Michael Williamson</Copyright>
-    <Version>1.7.0-alpha.1</Version>
+    <Version>1.7.0-alpha.2</Version>
     <DebugType>portable</DebugType>
     <ConsolePause>false</ConsolePause>
     <Authors>Michael Williamson</Authors>
