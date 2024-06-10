@@ -24,7 +24,7 @@
     <OutputPath>bin\Release</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.IO.Compression" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Couscous/mammoth/internal/util/Objects.cs" />
