@@ -98,7 +98,7 @@ namespace Mammoth.Tests {
                 Directory.Delete(tempDirectory, recursive: true);
             }
         }
-        
+
         [Fact]
         public void ImageConversionCanBeCustomised() {
             AssertSuccessfulConversion(
@@ -106,7 +106,7 @@ namespace Mammoth.Tests {
                 "<p><img src=\"iV,image/png\" /></p>"
             );
         }
-        
+
         private IDictionary<string, string> ConvertImage(IImage image) {
             using (var stream = image.GetStream()) {
                 var base64 = StreamToBase64(stream);
@@ -114,7 +114,7 @@ namespace Mammoth.Tests {
                 return new Dictionary<string, string> { { "src", src } };
             }
         }
-        
+
         private static string StreamToBase64(System.IO.Stream stream) {
             var memoryStream = new System.IO.MemoryStream();
             stream.CopyTo(memoryStream);
@@ -269,7 +269,7 @@ namespace Mammoth.Tests {
         }
 
         private string TestFilePath(string name) {
-            return Path.Combine("../../TestData", name);
+            return Path.Combine("../../../TestData", name);
         }
     }
 }
