@@ -8,3 +8,8 @@ build:
 
 test: build
 	dotnet test
+
+.PHONY: pack
+
+pack: test
+	dotnet pack Mammoth
