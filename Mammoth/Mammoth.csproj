@@ -13,6 +13,7 @@
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/mwilliamson/dotnet-mammoth</PackageProjectUrl>
     <PackageTags>docx html office word</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug</OutputPath>
@@ -27,5 +28,8 @@
   <ItemGroup>
     <Compile Remove="Couscous/mammoth/internal/util/Objects.cs" />
     <Compile Remove="Couscous/mammoth/internal/styles/parsing/StyleMapParser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>
