@@ -5,8 +5,6 @@
     <AssemblyTitle>Mammoth.Cli</AssemblyTitle>
     <Copyright>Michael Williamson</Copyright>
     <Deterministic>false</Deterministic>
-    <AssemblyVersion>1.0.*</AssemblyVersion>
-    <FileVersion>1.0.*</FileVersion>
     <DebugType>portable</DebugType>
     <Externalconsole>true</Externalconsole>
   </PropertyGroup>
