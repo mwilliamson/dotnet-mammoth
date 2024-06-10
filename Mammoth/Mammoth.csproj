@@ -12,7 +12,7 @@
     <DebugType>portable</DebugType>
     <ConsolePause>false</ConsolePause>
     <Authors>Michael Williamson</Authors>
-    <PackageLicenseUrl>http://opensource.org/licenses/BSD-2-Clause</PackageLicenseUrl>
+    <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/mwilliamson/dotnet-mammoth</PackageProjectUrl>
     <PackageTags>docx html office word</PackageTags>
   </PropertyGroup>
