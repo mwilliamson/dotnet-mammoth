@@ -4118,9 +4118,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
             Mammoth.Couscous.java.util.Optional<string> font = element.getAttributeOrNone("w:font");
             Mammoth.Couscous.java.util.Optional<string> charValue = element.getAttributeOrNone("w:char");
             if (font.isPresent() && charValue.isPresent()) {
-                Mammoth.Couscous.java.util.Optional<int> dingbat = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Dingbats.findDingbat(font.get(), int.Parse(charValue.get()));
+                Mammoth.Couscous.java.util.Optional<int> dingbat = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Dingbats.findDingbat(font.get(), System.Convert.ToInt32(charValue.get(), 16));
                 if (!dingbat.isPresent() && Mammoth.Couscous.java.util.regex.Pattern.matches("F0..", charValue.get())) {
-                    dingbat = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Dingbats.findDingbat(font.get(), int.Parse((charValue.get()).Substring(2)));
+                    dingbat = Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.Dingbats.findDingbat(font.get(), System.Convert.ToInt32((charValue.get()).Substring(2), 16));
                 }
                 if (dingbat.isPresent()) {
                     return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Text(Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Strings.codepointToString(dingbat.get())));
@@ -4568,7 +4568,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
 namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
     internal class StatefulBodyXmlReader__Anonymous_18 : Mammoth.Couscous.java.util.function.Function<string, int> {
         public int apply(string arg0) {
-            return int.Parse(arg0);
+            return System.Convert.ToInt32(arg0);
         }
     }
 }
