@@ -6,7 +6,7 @@
     <Product>Mammoth</Product>
     <Description>Convert Word documents from docx to simple HTML</Description>
     <Copyright>Copyright 2015 - 2016 Michael Williamson</Copyright>
-    <Version>8.7.0</Version>
+    <Version>1.7.1-alpha.3</Version>
     <DebugType>portable</DebugType>
     <ConsolePause>false</ConsolePause>
     <Authors>Michael Williamson</Authors>
@@ -14,8 +14,6 @@
     <PackageProjectUrl>https://github.com/mwilliamson/dotnet-mammoth</PackageProjectUrl>
     <PackageTags>docx html office word</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Title>Mammoth</Title>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug</OutputPath>
