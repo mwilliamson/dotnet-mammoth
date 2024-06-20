@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mammoth", "Mammoth\Mammoth.csproj", "{51C5CBD6-8809-4D5E-BABE-1787A16F5ED8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mammoth", "Mammoth\Mammoth.csproj", "{51C5CBD6-8809-4D5E-BABE-1787A16F5ED8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mammoth.Cli", "Mammoth.Cli\Mammoth.Cli.csproj", "{20602E78-EEBD-407B-B8C3-EDB6254BD663}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mammoth.Cli", "Mammoth.Cli\Mammoth.Cli.csproj", "{20602E78-EEBD-407B-B8C3-EDB6254BD663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mammoth.Tests", "Mammoth.Tests\Mammoth.Tests.csproj", "{E9C3EA8B-FF3B-4E3E-8137-1510465200B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mammoth.Tests", "Mammoth.Tests\Mammoth.Tests.csproj", "{E9C3EA8B-FF3B-4E3E-8137-1510465200B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
