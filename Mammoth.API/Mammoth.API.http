@@ -1,0 +1,6 @@
+@Mammoth.API_HostAddress = http://localhost:5089
+
+GET {{Mammoth.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
