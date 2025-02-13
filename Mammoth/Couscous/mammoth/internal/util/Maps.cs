@@ -36,7 +36,8 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.util
         internal static Map<K, V> toMap<T, K, V>(Iterable<T> iterable, Function<T, Map__Entry<K, V>> function) {
             var dictionary = FromJava.IterableToEnumerable(iterable)
                 .Select(function.apply)
-                .ToDictionary(entry => entry.getKey(), entry => entry.getValue());
+                .GroupBy(entry => entry.getKey())
+                .ToDictionary(group => group.Key, group => group.First().getValue());
             return ToJava.DictionaryToMap(dictionary);
             
         }
