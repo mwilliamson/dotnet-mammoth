@@ -4163,6 +4163,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 (this._complexFieldStack).add(Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField_static.begin(element));
                 (this._currentInstrText).setLength(0);
             } else if (type.Equals("end")) {
+                if ((this._complexFieldStack).isEmpty()) {
+                    return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.emptyWithWarning("Ignoring complex field end character without corresponding start character");
+                }
                 Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField complexField = (this._complexFieldStack).remove();
                 if (complexField is Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__BeginComplexField) {
                     complexField = this.parseCurrentInstrText(complexField);
@@ -4171,6 +4174,9 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                     return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.success(new Mammoth.Couscous.org.zwobble.mammoth.@internal.documents.Checkbox(((Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__CheckboxComplexField) complexField)._checked));
                 }
             } else if (type.Equals("separate")) {
+                if ((this._complexFieldStack).isEmpty()) {
+                    return Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.ReadResult.emptyWithWarning("Ignoring complex field separator character without corresponding start character");
+                }
                 Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField complexFieldSeparate = (this._complexFieldStack).remove();
                 Mammoth.Couscous.org.zwobble.mammoth.@internal.docx.StatefulBodyXmlReader__ComplexField complexField = this.parseCurrentInstrText(complexFieldSeparate);
                 (this._complexFieldStack).add(complexField);
@@ -6854,7 +6860,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing {
             return new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenIterator<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.StyleMappingTokeniser.tokeniseToList(line), new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(line.Length, Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._EOF, ""));
         }
         public static Mammoth.Couscous.java.util.List<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.Token<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>> tokeniseToList(string line) {
-            string stringPrefix = "'(?:(?:\\\\.|[^'])*)";
+            string stringPrefix = "'(?:(?:\\\\(?:.|$)|[^'\\\\])*)";
             string identifierCharacter = "(?:[a-zA-Z\\-_]|\\\\.)";
             Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType> tokeniser = new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._UNKNOWN, Mammoth.Couscous.org.zwobble.mammoth.@internal.util.Lists.list<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>>(new Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser__TokenRule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>[] {Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._IDENTIFIER, ((identifierCharacter + "(?:") + identifierCharacter) + "|[0-9])*"), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._SYMBOL, ":|>|=>|\\^=|=|\\(|\\)|\\[|\\]|\\||!|\\."), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._WHITESPACE, "\\s+"), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._STRING, stringPrefix + "'"), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._UNTERMINATED_STRING, stringPrefix), Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.RegexTokeniser.rule<Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType>(Mammoth.Couscous.org.zwobble.mammoth.@internal.styles.parsing.TokenType._INTEGER, "[0-9]+")}));
             return tokeniser.tokenise(line);
