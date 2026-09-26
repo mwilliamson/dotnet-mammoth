@@ -4054,7 +4054,13 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                     return this.readInline(element);
                 case "w:sdt":
                     return this.readSdt(element);
+                case "w:customXml":
                 case "w:ins":
+                case "w:moveFromRangeEnd":
+                case "w:moveFromRangeStart":
+                case "w:moveTo":
+                case "w:moveToRangeEnd":
+                case "w:moveToRangeStart":
                 case "w:object":
                 case "w:smartTag":
                 case "w:drawing":
@@ -4078,6 +4084,7 @@ namespace Mammoth.Couscous.org.zwobble.mammoth.@internal.docx {
                 case "w:footnoteRef":
                 case "w:endnoteRef":
                 case "w:annotationRef":
+                case "w:moveFrom":
                 case "w:pPr":
                 case "w:rPr":
                 case "w:tblPr":
